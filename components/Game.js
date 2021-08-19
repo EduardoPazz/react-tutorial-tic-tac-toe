@@ -1,25 +1,13 @@
 import React from "react";
 import Board from "./Board";
+import concatClasses from "../lib/concatClasses";
+import calculateWinner from "../lib/calculateWinner"
+import gameStyles from "../styles/modules/game.module.css";
+import promptStyles from "../styles/modules/prompt.module.css";
+import utilStyles from "../styles/modules/utils.module.css";
+import Historical from "./Historical";
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
+
 
 export default class Game extends React.Component {
 
@@ -45,7 +33,7 @@ export default class Game extends React.Component {
       return;
     }
 
-    squares[i] = this.state.xIsNext ? "X" : "O";
+    squares[i] = this.state.xIsNext ? "x" : "o";
     
     this.setState({
       history: [ ...history, { squares: squares }],
@@ -67,39 +55,34 @@ export default class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares)
 
-    const moves = history.map((move, step) => {
-      const description ='Go to move #' + step;
-
-      return (
-        <li>
-          <button 
-            key={step} 
-            onClick={() => this.jumpTo(step)}
-          >
-            {description}
-          </button>
-        </li>
-      );
-    })
-
-    const status = (winner === null)
+    const prompt = (winner === null)
       ? `Next player: ${this.state.xIsNext ? "X" : "O"}`
-      : `Winner: ${winner}`;
+      : `Winner: ${winner.toUpperCase()}`;
 
+    const gameClassName = concatClasses(gameStyles.game,
+      utilStyles['rounded-full'],
+      utilStyles.shadow);
+
+    const promptClassName = concatClasses(promptStyles.prompt,
+      utilStyles.big);
 
     return (
-      <div className="game">
-        <div className="game-board">
+      <section className={gameClassName}>
+        <p className={promptStyles.prompt}>{prompt}</p>
+        <div className={utilStyles['two-col']}>
           <Board 
             squares={current.squares}
             onClick={i => this.handleClick(i)}
           />
+          <aside style={{textAlign: 'center', margin: '10px'}}>
+            <Historical 
+              history={history}
+              onClick={step => this.jumpTo(step)}
+
+            />
+          </aside>
         </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-      </div>
+      </section>
     );
   }
 }

@@ -1,0 +1,10 @@
+.prompt {
+    text-align: center;
+    font-size: 36px;
+}
+
+@media screen and (max-width: 500px) {
+    .prompt {
+        font-size: 20px;
+    }
+}

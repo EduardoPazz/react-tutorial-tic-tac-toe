@@ -1,0 +1,53 @@
+/* Border */
+
+.rounded-full {
+    border-radius: var(--round);
+}
+
+.rounded-top-left {
+    border-top-left-radius: var(--round);
+}
+
+.rounded-top-right {
+    border-top-right-radius: var(--round);
+}
+
+.rounded-bottom-left {
+    border-bottom-left-radius: var(--round);
+}
+
+.rounded-bottom-right {
+    border-bottom-right-radius: var(--round);
+}
+
+/* Box Shadow */
+
+.shadow {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Fonts */
+
+.huge {
+    font-size: 96px;
+}
+
+.big {
+    font-size: 36px;
+}
+
+.normal {
+    font-size: 24px;
+}
+
+.small {
+    font-size: 18px;
+}
+
+/* Flexbox */
+.two-col {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}

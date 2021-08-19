@@ -1,33 +1,20 @@
 import Square from "./Square";
+import { grid } from "../styles/modules/board.module.css";
 
-export default function Board(props) {
+export default function Board({ squares, onClick }) {
 
-  function renderSquare(i) {
-    return (
+  function renderSquares() {
+    return [...Array(9).keys()].map(k => (
       <Square
-        value={props.squares[i]}
-        onClick={() => props.onClick(i)}
+        value={squares[k]}
+        onClick={() => onClick(k)}
       />
-    );
+    ));
   }
 
   return (
-    <div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
+    <div className={grid}>
+      {renderSquares()}
     </div>
   );
 }

@@ -1,0 +1,13 @@
+.game {
+    width: 90%;
+    max-width: 800px;
+    padding: 70px;
+    margin: 80px auto 0;
+    background-color: #cfc1e5;
+}
+
+@media screen and (max-width: 500px) {
+    .game {
+        padding: 20px;
+    }
+}

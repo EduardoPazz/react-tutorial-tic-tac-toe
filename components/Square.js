@@ -1,12 +1,12 @@
-import styles from "../styles/modules/square.module.css";
+import { square } from "../styles/modules/square.module.css";
 
-export default function Square(props) {
+export default function Square({ value, onClick }) {
   return (
     <button 
-      className={styles.square} 
-      onClick={props.onClick}
+      onClick={onClick}
+      className={square}
     >
-      {props.value}
+      <div>{value}</div>
     </button>
   );
 }

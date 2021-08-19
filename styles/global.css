@@ -1,3 +1,16 @@
-body {
-  font: 14px "Century Gothic", Futura, sans-serif;
+:root {
+    --round: 5px;
+    font-family: Roboto, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+ol {
+    padding: 0;
+}
+
+li {
+    list-style: none;
 }

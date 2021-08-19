@@ -1,0 +1,64 @@
+.grid {
+    margin: 10px;
+    display: grid;    
+    grid-template-columns: repeat(3, 1fr);
+    /* gap: -1px; */
+}
+
+.grid button {
+    border: none;
+    background-color: white;
+    border-top: 1px solid #515151;
+    border-left: 1px solid #515151;
+    width: 100px;
+    height: 100px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 100px;
+}
+
+/* It must have a clever way style those rounded borders... */
+.grid button:nth-child(1) {
+    border-top-left-radius: 5px;
+}
+
+.grid button:nth-child(3) {
+    border-top-right-radius: 5px;
+}
+
+.grid button:nth-child(7) {
+    border-bottom-left-radius: 5px;
+}
+
+.grid button:nth-child(9) {
+    border-bottom-right-radius: 5px;
+}
+
+.grid button:nth-child(3),
+.grid button:nth-child(6),
+.grid button:nth-child(9) {
+    border-right: 1px solid #515151;
+}
+
+.grid button:nth-child(7),
+.grid button:nth-child(8),
+.grid button:nth-child(9) {
+    border-bottom: 1px solid #515151;
+}
+
+
+.grid button > * {
+    padding-bottom: 25%;
+}
+
+
+@media screen and (max-width: 500px) {
+    .grid button {
+        height: 50px;
+        width: 50px;
+        font-size: 50px;
+    }
+}

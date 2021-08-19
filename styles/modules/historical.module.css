@@ -1,0 +1,12 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.grid button {
+    border: 1px solid #515151;
+    background-color: white;
+    color: #515151;
+    padding: 5px;
+}
