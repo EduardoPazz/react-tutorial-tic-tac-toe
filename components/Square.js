@@ -1,10 +1,9 @@
-import React from "react";
-import "../index.css";
+import styles from "../styles/modules/square.module.css";
 
 export default function Square(props) {
   return (
     <button 
-      className="square" 
+      className={styles.square} 
       onClick={props.onClick}
     >
       {props.value}
