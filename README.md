@@ -2,7 +2,6 @@
 
 # React Tutorial: Tic Tac Toe
 
-A Tic Tac Toe implementation using React, according to [React introduction guide](https://reactjs.org/tutorial/tutorial.html).
+A Tic Tac Toe implementation using React, React Hooks and Next.
 
-# To-do
-- Style it.
+Inspired by [React introduction guide](https://reactjs.org/tutorial/tutorial.html).
