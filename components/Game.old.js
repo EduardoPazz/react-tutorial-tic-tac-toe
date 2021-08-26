@@ -63,9 +63,6 @@ export default class Game extends React.Component {
       utilStyles['rounded-full'],
       utilStyles.shadow);
 
-    const promptClassName = concatClasses(promptStyles.prompt,
-      utilStyles.big);
-
     return (
       <section className={gameClassName}>
         <p className={promptStyles.prompt}>{prompt}</p>

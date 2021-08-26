@@ -11,15 +11,17 @@ import Historical from "./Historical";
 
 export default function Game() {
 
-  const [squaresHistory, setSquaresHistory] = useState([
-    Array(9).fill(null)
-  ]);
+  const [squaresHistory, setSquaresHistory] = useState([{
+    squares: Array(9).fill(null)
+  }]);
   const [stepNumber, setStepNumber] = useState(0);
   const [xIsNext, setXIsNext] = useState(true);
   
   function handleClick(i) {
-    const history = squaresHistory.slice(0, stepNumber + 1);
-    const currentSquares = history[history.length - 1];
+    const currentHistory = squaresHistory.slice(0, stepNumber + 1);
+    const currentSquares = currentHistory[currentHistory.length - 1]
+      .squares
+      .slice();
 
     if ((calculateWinner(currentSquares) != null) 
         || (currentSquares[i] != null)) {
@@ -28,8 +30,8 @@ export default function Game() {
 
     currentSquares[i] = xIsNext ? "x" : "o";
 
-    setSquaresHistory([...history, currentSquares]);
-    setStepNumber(history.length);
+    setSquaresHistory([...currentHistory, {squares: currentSquares}]);
+    setStepNumber(currentHistory.length);
     setXIsNext(!xIsNext);
   }
 
@@ -39,26 +41,38 @@ export default function Game() {
     setXIsNext((step % 2) === 0);
   };
 
-  function render() {
-
-    return (
-      <section className={gameClassName}>
-        <p className={promptStyles.prompt}>{prompt}</p>
-        <div className={utilStyles['two-col']}>
-          <Board 
-            squares={current}
-            onClick={i => handleClick(i)}
-          />
-          <aside style={{textAlign: 'center', margin: '10px'}}>
-            <Historical
-              history={squaresHistory}
-              onClick={step => jumpTo(step)}
-            />
-          </aside>
-        </div>
-      </section>
-    )
+  function getCurrentSquares() {
+    return squaresHistory[stepNumber].squares;
   }
-  
-  return render();
+
+  function getPrompt() {
+    const winner = calculateWinner(getCurrentSquares());
+
+    return (winner === null)
+      ? `Next player: ${xIsNext ? "X" : "O"}`
+      : `Winner: ${winner.toUpperCase()}`;
+  }
+ 
+  const gameClassName = concatClasses(gameStyles.game,
+    utilStyles['rounded-full'],
+    utilStyles.shadow);
+
+  return (
+    <section className={gameClassName}>
+      <p className={promptStyles.prompt}>{getPrompt()}</p>
+      <div className={utilStyles['two-col']}>
+        <Board 
+          squares={getCurrentSquares()}
+          onClick={i => handleClick(i)}
+        />
+        <aside style={{textAlign: 'center', margin: '10px'}}>
+          <Historical
+            history={squaresHistory}
+            onClick={step => jumpTo(step)}
+          />
+        </aside>
+      </div>
+    </section>
+    )
+ 
 }
