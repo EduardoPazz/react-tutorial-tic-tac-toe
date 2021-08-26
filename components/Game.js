@@ -46,11 +46,16 @@ export default function Game() {
   }
 
   function getPrompt() {
-    const winner = calculateWinner(getCurrentSquares());
+    const currentSquares = getCurrentSquares();
+    const winner = calculateWinner(currentSquares);
 
-    return (winner === null)
-      ? `Next player: ${xIsNext ? "X" : "O"}`
-      : `Winner: ${winner.toUpperCase()}`;
+    if (winner !== null) return `Winner: ${winner.toUpperCase()}`;
+
+    if (currentSquares.every(square => square !== null)) {
+      return `Draw. Rollback to try again`;
+    }
+
+    return `Next player: ${xIsNext ? "X" : "O"}`;
   }
  
   const gameClassName = concatClasses(gameStyles.game,
